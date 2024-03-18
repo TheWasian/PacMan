@@ -22,26 +22,28 @@ void draw(){
   strokeWeight(10);
   line(0, height/2 - 50, width, height/2 - 50);
   line(0, height/2 + 50, width, height/2 + 50);
-  //calls on draw pacman function
-  drawPac();
-  
-  //calls on pacman movement function
-  pacMovement();
-  
-  
-}
-
-void drawPac(){
+  stroke(0);
   //draw pacman  circle
-  stroke(255,255,0);
-  fill(255,255,0);
-  arc(pacX, pacY, 50, 50, pacAngle, TWO_PI - pacAngle, PIE);
-  
-  pacAnimation();
-  
-}
 
-void pacMovement(){
+  fill(255,255,0);
+  circle(pacX,pacY,40);
+  
+  //mouth
+  fill(0);
+  if(right == true){
+    arc(pacX, pacY, 40.1, 40.1, -pacAngle, pacAngle);
+  }
+  else if(right == false){
+    arc(pacX, pacY, 40.1, 40.1, PI - pacAngle, PI +pacAngle);
+  }
+  
+  pacAngle += 0.035;
+  if(pacAngle >= QUARTER_PI){
+    pacAngle = 0;
+  }
+  
+  
+  
   //controls whether pacman moves left or right
   if(right){
     pacX = (pacX + pacSpeed) % width;
@@ -52,27 +54,17 @@ void pacMovement(){
       pacX = width;
    }
   }
+
 }
 
+  
 
-void pacAnimation() {
-  // Set the mouth opening and closing speed
-  float mouthSpeed = 0.1;
-  
-  // Update the mouth angle based on time
-  pacMouth += mouthSpeed;
-  
-  // Limit the mouth angle to prevent it from opening too wide
-  pacAngle = min(PI/3 * abs(sin(pacMouth)), PI/3);
-}
 
 
 
 void keyPressed() {
   // Change PacMan's direction when the spacebar is pressed
   if (key == ' ') {
-    right = !right;
-    // Reset mouth angle
-    pacAngle = 0;
-  }
+    right = !right;   
+    }
 }
