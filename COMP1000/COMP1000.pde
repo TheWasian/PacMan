@@ -1,6 +1,6 @@
 float pacX;
 float pacY;
-float pacSpeed = 3.5;
+float pacSpeed = 3;
 
 //animation variables
 float pacAngle = 0;
@@ -41,7 +41,7 @@ void draw(){
   }
   //resets pacAngle
     pacAngle += 0.035;
-  if(pacAngle >= QUARTER_PI){
+  if(pacAngle >= THIRD_PI){
     pacAngle = 0;
   }
 
