@@ -35,7 +35,7 @@ void draw(){
   else if(!right){
     pacX = (pacX - pacSpeed);
     arc(pacX, pacY, 40.1, 40.1, PI - pacAngle, PI +pacAngle);
-   if (pacX < 0) {
+   if (pacX < -10) {
       pacX = width;
    }
   }
