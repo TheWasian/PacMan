@@ -29,6 +29,7 @@ float berryDist;
 
 //game variables
 boolean gameover = false;
+int score = 0;
 
 void setup() {  
   size(800,200);
@@ -45,6 +46,10 @@ void setup() {
 
 void draw(){
   background(0);
+  fill(255);
+  //score text
+  textSize(15);
+  text(score,7,20);
   float delay = random(200,1000);
   
 //Blue tracks
@@ -65,16 +70,11 @@ void draw(){
  
  if(berryDist < 5){   
    berryX = random(0,800);
+   score = score+10;
    intangible = true;
    println("hit");
  }
  
-  
-  
-  
-  
-  
-  
 //PACMAN
   
   
@@ -130,10 +130,10 @@ void draw(){
   //determine ghost direction
   ghostTick++;
   if(ghostTick > delay){
-    //println("GhostTick: ");
-    //println(ghostTick);
-    //println("Delay: ");
-    //println(delay);
+    println("GhostTick: ");
+    println(ghostTick);
+    println("Delay: ");
+    println(delay);
     delay = random(200,1000);
     ghostTick = 0;
     ghostRight = !ghostRight;
@@ -162,8 +162,9 @@ void draw(){
  ghostDist = dist(pacX,pacY,ghostX,ghostY);
  println(ghostDist);
  if(ghostDist < 20 && intangible == false){
-   
-   println("GAMEOVER");
+   fill(174,173,175);
+   textSize(25);
+   text("GAMEOVER", width/2 - 40, height/2 + 25);
    noLoop();
    
  }
