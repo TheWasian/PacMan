@@ -18,6 +18,7 @@ color ghostColour;
 float ghostSpeed = 3.05;
 boolean ghostRight = true;
 float ghostTick = 0;
+float ghostDist = 0;
 
 //berry variable
 float berryX;
@@ -25,7 +26,11 @@ float berryY;
 float berryDist;
 
 
-void setup() {
+
+//game variables
+boolean gameover = false;
+
+void setup() {  
   size(800,200);
   pacY = height/2;
   pacX = width/2;
@@ -33,11 +38,14 @@ void setup() {
   berryX = random(0,800);
   berryY = height/2;
   
-
+  ghostX = random(0,800);
 }
+
+
 
 void draw(){
   background(0);
+  float delay = random(200,1000);
   
 //Blue tracks
   stroke(0, 0, 255);
@@ -58,6 +66,7 @@ void draw(){
  if(berryDist < 5){   
    berryX = random(0,800);
    intangible = true;
+   println("hit");
  }
  
   
@@ -120,7 +129,12 @@ void draw(){
   
   //determine ghost direction
   ghostTick++;
-  if(ghostTick > random(150,220)){
+  if(ghostTick > delay){
+    //println("GhostTick: ");
+    //println(ghostTick);
+    //println("Delay: ");
+    //println(delay);
+    delay = random(200,1000);
     ghostTick = 0;
     ghostRight = !ghostRight;
   }
@@ -142,9 +156,22 @@ void draw(){
       ghostX = width;
    }
   }
- } 
-  
+ 
+ 
+ //GAMEOVER
+ ghostDist = dist(pacX,pacY,ghostX,ghostY);
+ println(ghostDist);
+ if(ghostDist < 20 && intangible == false){
    
+   println("GAMEOVER");
+   noLoop();
+   
+ }
+ 
+  
+ } 
+
+
 
 
   
