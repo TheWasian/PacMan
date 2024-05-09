@@ -1,3 +1,4 @@
+//pacman variables
 float pacX;
 float pacY;
 float pacSpeed = 3;
@@ -15,23 +16,27 @@ void setup() {
 void draw(){
   background(0);
   
-  //Blue tracks
+//Blue tracks
   stroke(0, 0, 255);
   strokeWeight(10);
   line(0, height/2 - 50, width, height/2 - 50);
   line(0, height/2 + 50, width, height/2 + 50);
   stroke(0);
   
-  //draw pacman  circle
+//draw pacman  circle
   fill(255,255,0);
   circle(pacX,pacY,40);
   
-  //controls whether pacman moves left or right and animation of mouth
+//controls whether pacman moves left or right and animation of mouth
   fill(0);
   if(right){
-    pacX = (pacX + pacSpeed) % width;
+    pacX = (pacX + pacSpeed);
     arc(pacX, pacY, 40.1, 40.1, -pacAngle, pacAngle);
+    if (pacX > 810){
+      pacX = 0;
+    }
   }
+  
   else if(!right){
     pacX = (pacX - pacSpeed);
     arc(pacX, pacY, 40.1, 40.1, PI - pacAngle, PI +pacAngle);
@@ -39,7 +44,7 @@ void draw(){
       pacX = width;
    }
   }
-  //resets pacAngle
+//resets pacAngle
     pacAngle += 0.035;
   if(pacAngle >= THIRD_PI){
     pacAngle = 0;
@@ -49,7 +54,7 @@ void draw(){
 
   
 void keyPressed() {
-  // Change PacMan's direction when the spacebar is pressed
+// Change PacMan's direction when the spacebar is pressed
   if (key == ' ') {
     right = !right;   
     }
