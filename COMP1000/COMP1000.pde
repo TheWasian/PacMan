@@ -73,10 +73,13 @@ void draw() {
   stroke(0);
   
   //PELLETS
-  boolean allPelletsEaten = true; // Flag to check if all pellets are eaten
+  
+  // Flag to check if all pellets are eaten
+  boolean allPelletsEaten = true;
   for (int i = 0; i < pellets.length; i++) {
     if (!pelletEaten[i]) {
-      allPelletsEaten = false; // If there's at least one pellet not eaten, set the flag to false
+      // If there's at least one pellet not eaten, set the flag to false
+      allPelletsEaten = false;
       fill(255);
       circle(pellets[i][0], pellets[i][1], pelletSize);
       if (dist(pellets[i][0], pellets[i][1], pacX, pacY) < pelletSize / 2) {
