@@ -182,8 +182,9 @@ void draw() {
   if (ghostDist < 15 && intangible == false) {
     fill(174, 173, 175);
     textSize(25);
-    text("GAMEOVER", width/2 - 25, height/2 + 25);
+    text("GAMEOVER", 331, 109);
     noLoop();
+    
   }
 }
 
