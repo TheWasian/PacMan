@@ -35,6 +35,7 @@ float pelletSize = 5;
 float pelletSpacing;
 float[][] pellets = new float[26][2];
 boolean[] pelletEaten = new boolean[26];
+int pelletCounter = 26;
 
 void setup() {  
   size(800, 200);
@@ -48,6 +49,7 @@ void setup() {
   
   pelletSpacing = width / numPellets;
   
+  //initalises Pellet locattions
   for (int i = 0; i < pellets.length; i++) {
     pellets[i][0] = (i + 0.5) * pelletSpacing;
     pellets[i][1] = height / 2;
@@ -71,17 +73,27 @@ void draw() {
   stroke(0);
   
   //PELLETS
+  boolean allPelletsEaten = true; // Flag to check if all pellets are eaten
   for (int i = 0; i < pellets.length; i++) {
     if (!pelletEaten[i]) {
+      allPelletsEaten = false; // If there's at least one pellet not eaten, set the flag to false
       fill(255);
       circle(pellets[i][0], pellets[i][1], pelletSize);
       if (dist(pellets[i][0], pellets[i][1], pacX, pacY) < pelletSize / 2) {
         pelletEaten[i] = true;
-        score += 10;
+        score += 5;
+        pelletCounter++;
       }
     }
   }
   
+  // Respawn pellets if all are eaten
+  if (allPelletsEaten) {
+    for (int i = 0; i < pellets.length; i++) {
+      pelletEaten[i] = false;
+    }
+  }
+ 
   //BERRY
   fill(255, 184, 3);
   strokeWeight(0);
@@ -159,7 +171,7 @@ void draw() {
       ghostX = 0;
     }
   } else if (ghostRight == false) {
-    ghostX = (ghostX - ghostSpeed);
+    ghostX = (ghostX - ghostSpeed); 
     if (ghostX < -10) {
       ghostX = width;
     }
@@ -167,11 +179,10 @@ void draw() {
  
   //GAMEOVER
   ghostDist = dist(pacX, pacY, ghostX, ghostY);
-  println(ghostDist);
-  if (ghostDist < 20 && intangible == false) {
+  if (ghostDist < 15 && intangible == false) {
     fill(174, 173, 175);
     textSize(25);
-    text("GAMEOVER", width/2 - 40, height/2 + 25);
+    text("GAMEOVER", width/2 - 25, height/2 + 25);
     noLoop();
   }
 }
