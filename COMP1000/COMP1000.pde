@@ -35,7 +35,6 @@ float pelletSize = 5;
 float pelletSpacing;
 float[][] pellets = new float[26][2];
 boolean[] pelletEaten = new boolean[26];
-int pelletCounter = 26;
 
 void setup() {  
   size(800, 200);
@@ -85,7 +84,6 @@ void draw() {
       if (dist(pellets[i][0], pellets[i][1], pacX, pacY) < pelletSize / 2) {
         pelletEaten[i] = true;
         score += 5;
-        pelletCounter++;
       }
     }
   }
