@@ -74,13 +74,16 @@ void draw() {
   //PELLETS
   
   // Flag to check if all pellets are eaten
+  //Boolean put here because it checks if its true every frame
   boolean allPelletsEaten = true;
   for (int i = 0; i < pellets.length; i++) {
+    //this will not run if all varibles in the array are false and creates the pellets
     if (!pelletEaten[i]) {
       // If there's at least one pellet not eaten, set the flag to false
       allPelletsEaten = false;
       fill(255);
       circle(pellets[i][0], pellets[i][1], pelletSize);
+      //checks distance and changes boolean for eaten in the array
       if (dist(pellets[i][0], pellets[i][1], pacX, pacY) < pelletSize / 2) {
         pelletEaten[i] = true;
         score += 5;
@@ -154,10 +157,8 @@ void draw() {
   //determine ghost direction
   ghostTick++;
   if (ghostTick > delay) {
-    println("GhostTick: ");
-    println(ghostTick);
-    println("Delay: ");
-    println(delay);
+    println("GhostTick:", ghostTick);
+    println("Delay:", delay);
     delay = random(200, 1000);
     ghostTick = 0;
     ghostRight = !ghostRight;
